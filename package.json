@@ -20,10 +20,15 @@
     "@theme-ui/prism": "^0.16.1",
     "gatsby": "^5.12.9",
     "gatsby-plugin-mdx": "^5.12.3",
+    "gatsby-plugin-react-helmet": "^6.12.0",
+    "gatsby-plugin-sharp": "^5.12.3",
     "gatsby-plugin-theme-ui": "^0.16.1",
+    "gatsby-remark-images": "^7.12.3",
     "gatsby-source-filesystem": "^5.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.0.0",
+    "react-seo-component": "^2.0.2",
     "theme-ui": "^0.16.1"
   }
 }
