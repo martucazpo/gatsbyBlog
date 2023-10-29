@@ -1,13 +1,12 @@
 import { graphql, Link as GatsbyLink } from "gatsby";
 import React from "react";
 import { Box, Heading, Link } from "theme-ui";
-import { Layout } from "../components/layout";
 
 export default function IndexPage({ data }) {
+  console.log(data)
   return (
     <>
-      <Layout>
-        {data.allMdx.nodes.map(({ id, excerpt, frontmatter, slug }) => (
+        {data.allMdx.nodes.map(({ id, excerpt, frontmatter, fields }) => (
           <Box
             key={id}
             as="article"
@@ -19,7 +18,7 @@ export default function IndexPage({ data }) {
               borderRadius: "15px",
             }}
           >
-            <Link as={GatsbyLink} to={`/${slug}`}>
+            <Link as={GatsbyLink} to={`${fields.slug}`}>
               <Heading>{frontmatter.title}</Heading>
               <Box as="p" variant="styles.p">
                 {frontmatter.date}
@@ -30,26 +29,25 @@ export default function IndexPage({ data }) {
             </Link>
           </Box>
         ))}
-      </Layout>
     </>
   );
 }
 
 export const query = graphql`
-  query SITE_INDEX_QUERY  {
-    allMdx(
-      sort: {frontmatter: {date: DESC}}
-    ) {
-      nodes {
-        id
-        excerpt(pruneLength: 250)
-        frontmatter {
-          title
-          date(formatString: "YYYY MMMM Do")
-        }
-        
+query SITE_INDEX_QUERY {
+  allMdx(sort: {frontmatter: {date: DESC}}) {
+    nodes {
+      id
+      excerpt(pruneLength: 250)
+      frontmatter {
+        title
+        date(formatString: "YYYY MMMM Do")
+      }
+      fields {
+        slug
       }
     }
   }
+}
   `
     ;
