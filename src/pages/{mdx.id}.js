@@ -5,9 +5,8 @@ import SEO from "react-seo-component";
 import { Box } from "theme-ui";
 import { useSiteMetadata } from "../hooks/use-site-metadata";
 
-export default function PostPage({ data }) {
+export default function PostPage({ data, children }) {
   const {
-    body,
     fields,
     excerpt,
     frontmatter: { title, date },
@@ -38,31 +37,30 @@ export default function PostPage({ data }) {
       <Box as="h1" variant="styles.h1" fontSize="4xl">
         {title}
       </Box>
-      <div>{body}</div>
-      {/* <MDXRenderer>{body}</MDXRenderer> */}
+      {children}
     </>
   );
 };
 
 export const query = graphql`
-query POST_BY_SLUG($slug: String) {
-    mdx(fields: {slug: {eq: $slug}}) {
-      id
-      body
-      frontmatter {
-        date
-        title
-      }
-      fields {
-        slug
-      }
+query POST_BY_ID($id: String) {
+  mdx(id: {eq: $id}) {
+    id
+    excerpt(pruneLength: 120)
+    frontmatter {
+      date
+      title
     }
-    allMdx {
-      edges {
-        node {
-          id
-        }
+    fields {
+      slug
+    }
+  }
+  allMdx {
+    edges {
+      node {
+        id
       }
     }
   }
+}
 `;

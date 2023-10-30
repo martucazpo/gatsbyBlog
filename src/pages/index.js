@@ -36,7 +36,7 @@ export default function IndexPage({ data }) {
             borderRadius: "15px",
           }}
         >
-          <Link as={GatsbyLink} to={`${fields.slug}`}>
+          <Link as={GatsbyLink} to={`${id}`}>
             <Heading>{frontmatter.title}</Heading>
             <Box as="p" variant="styles.p">
               {frontmatter.date}
